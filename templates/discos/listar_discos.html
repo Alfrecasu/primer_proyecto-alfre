@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Discos</title>
+{% endblock %}
+
+{% block navegacion %}
+{% include 'navegacion.html' %}
+{% endblock %}
+
+{% block contenido %}
+
+<form class="d-flex" role="search" method="get" action="{% url 'apps.discos:listar_discos' %}">
+    <input class="form-control me-2" type="search" placeholder="Buscar disco por titulo" aria-label="Search"
+        name="buscador">
+    <button class="btn btn-outline-success" type="submit">Buscar</button>
+</form>
+
+<form method="GET" action="{% url 'apps.discos:ordenar_por' %}">
+    <button class="btn btn-secondary" name="orden" type="submit" value="fecha" style="margin-top: 25px;">Ordenar por
+        fecha</button>
+    <button class="btn btn-secondary" name="orden" type="submit" value="titulo" style="margin-top: 25px;">Ordenar por
+        título</button>
+</form>
+
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+        style="margin-top: 25px;">
+        Discos
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'apps.discos:listar_discos' %}">Todos</a></li>
+        {% for i in categorias %}
+        <li><a class="dropdown-item" href="{% url 'apps.discos:listar_por_categoria' i.nombre %}">{{i.nombre}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<section data-bs-version="5.1" class="timeline3 cid-tf4QbpyVP7" id="timeline3-o">
+    {% if discos %}
+    <div class="container-fluid" style="margin-top: 2%">
+        <div class="mbr-section-head">
+            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2" style="text-align: center;">
+                <strong>Discos</strong>
+            </h3>
+        </div>
+        <div class="row" style="margin-bottom: 2%;">
+            {% for p in discos %}
+            <div class="col-md-4 mb-3">
+                <div class="card" style="text-align: center;">
+                    <div class="card-img-top" style="display: block; width: 70%; margin: auto;">
+                        <img src="{{ p.imagen.url }}" class="card-img-top w-50" alt="{{p.titulo}}">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{p.titulo}}</h5>
+                        <p style='text-align: center;' class="mbr-timeline-date "><small
+                                class="text-body-secondary">{{p.fecha_agregado}}</small></p>
+                        <p class="card-text">Si quiere leer mas acerca de este disco, click en leer más</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Categoria: {{p.categoria}}</li>
+                        <li class="list-group-item">Autor: {{p.autor}}</li>
+                        <li class="list-group-item">Agregado por: {{p.colaborador}}</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="{% url 'apps.discos:detalle_disco' p.pk %}" class="btn btn-primary"
+                            style="font-size: small;">Leer
+                            más</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% include 'discos/paginador.html' %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

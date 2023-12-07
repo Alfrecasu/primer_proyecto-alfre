@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+<title>Contacto #dinamico</title>
+{% endblock %}
+
+{% block contenido %}
+<p> Hola desde el contacto </p>
+{% for nombre in nombres %}
+{% if nombre == 'Informatorio' %}
+<p>Este nombre no puede ser mostrado</p>
+{% else %}
+<p>{{nombre}}</p>
+{% endif %}
+{% endfor %}
+{% endblock %}

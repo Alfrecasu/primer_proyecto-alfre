@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+<title>Agregar categoria</title>
+{% endblock %}
+
+{% block navegacion %}
+{% include 'navegacion.html' %}
+{% endblock %}
+
+{% block contenido %}
+
+<form method="post">
+    {% csrf_token %}
+
+    <h2>Agregar Categoria</h2>
+    <div>
+        {{ form.as_p }}
+        <input type="submit" value="Guardar">
+    </div>
+</form>
+{% endblock %}

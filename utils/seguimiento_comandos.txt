@@ -1,0 +1,22 @@
+Dentro de la carpeta 'Proyecto' ejecutamos -> django-admin startproject <nombre_del_proyecto> # a_prueba
+Creamos en la carpeta a_prueba -> views.py -> funcion index(request)
+En la base/raiz del proyecto(Proyecto1) creamos una carpeta 'templates' #la raiz es la carpeta que contiene al manage.py
+Y dentro de esa carpeta crearemos un archivo llamado 'index.html' y le agregamos -> Hola desde el index!
+Para configurar la ubicacion de la carpeta templates -> settings.py -> TEMPLATES : "DIRS": [ BASE_DIR / "templates"]
+En el archivo urls.py -> importamos la view 'index' y luego en la seccion paths -> path("index/",index),
+Ejecutamos el comando: 'python manage.py migrate'
+Para ver cuales son los comandos que puedo utilizar con el manage.py ->'python manage.py help'
+Para correr el servidor ejecutamos -> 'python manage.py runserver'
+Y para ver el path que agregamos, a la direccion que nos brinda la cmd (127.0.0....etc), le agregamos el path que queremos visualizar #Ejemplo : 127.0.0.1:8000/contacto
+Creamos las carpetas: apps, static, media, utils
+En el archivo settings.py -> INSTALLED_APPS = [..., "apps.<nombre_de_la_app>"]
+Agregamos en settings -> AUTH_USER_MODEL = '<nombre de la app>.<nombre del modelo>'
+En el archivo models.py generamos la clase con los atributos para la base de datos
+En apps.py cambiamos el name= 'apps.<nombre_de_la_app>'
+En admin.py registramos la aplicacion para poder acceder a ella desde el panel de admin de django
+El la carpeta media dividimos tambien por carpetas, en este caso, creamos la carpeta usuarios
+En la app usuarios creamos en views.py la vista basada en clase para registrar usuarios
+En el archivo urls generales, agregamos las urls de la app usuarios
+Creamos el archivo urls.py en apps.usuarios
+Utilizamos la vista creada, para vincularla a un path(registrar/)
+En templates creamos una carpeta llamada usuarios que va a contener todos los html vinculados a los usuarios

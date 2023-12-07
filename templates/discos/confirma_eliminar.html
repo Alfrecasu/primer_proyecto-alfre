@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+<title>Confirma eliminar</title>
+{% endblock %}
+
+{% block navegacion %}
+{% include 'navegacion.html' %}
+{% endblock %}
+
+{% block contenido %}
+<form method="post">
+    {% csrf_token %}
+    <p>Seguro que desea eliminar?</p>
+    <input type="submit" value="Si, eliminar">
+    <a href="{% url 'inicio' %}" class="btn btn-primary"> No, volver al inicio</a>
+</form>
+{% endblock %}
